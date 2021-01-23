@@ -1,0 +1,114 @@
+//https://gist.github.com/iton5/99f59deb666c1b691464c90f5f22da5d
+//https://github.com/itchampclub/qawithauth
+
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = spreadsheet.getActiveSheet();
+ if ((messageText === "คิว")){
+    var qtid = sheet.getRange(1,5).getValues();
+    var stid = sheet.getRange(1,7).getValues();
+    var ltid = sheet.getRange(1,8).getValues();
+     var ntid = sheet.getRange(1,10).getValues();
+     var etid = sheet.getRange(1,11).getValues();
+ var today = new Date();
+  var now = Utilities.formatDate(today, "Asia/Bangkok", "HHmm");
+  var day = today.getDay();
+  if(day === 0 || day === 6 && ntid <= now ){
+  var msg = [{
+        type: "text",
+        text: "ปิดทำการในช่วงบ่ายวันเสาร์วันอาทิตย์และวันหยุดนักขัตฤกษ์"
+      }]
+
+  }else if ((stid <= now && now < ltid) || (ntid <= now && now < etid)){
+  var msg = [{
+        "type": "flex",
+        "altText": "ตั๋วจองคิว",
+        "contents": {
+  "type": "bubble",
+  "size": "giga",
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "text",
+        "text": "บัตรคิวที่",
+        "weight": "bold",
+        "align": "center",
+        "color": "#ffffff"
+      },
+      {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "text",
+            "text": ""+qtid ,
+            "color": "#FFFF00",
+            "align": "center",
+            "size": "100px",
+            "weight": "bold"
+          }
+        ],
+        "margin": "md"
+      },
+      {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "text",
+            "text": "*กรุณาแสดงบัตรคิวกับเจ้าหน้าที่",
+            "color": "#ffffffAA",
+            "align": "center",
+            "wrap": true
+          },
+          {
+            "type": "text",
+            "text": "*หากคุณมาสายคิวจะตกที่ลำดับถัดไป",
+            "color": "#ffffffAA",
+            "align": "center",
+            "margin": "md"
+          }
+        ],
+        "backgroundColor": "#A52A2A55"
+      },
+      {
+        "type": "box",
+        "layout": "horizontal",
+        "contents": [
+          {
+            "type": "image",
+            "url": "https://store.kidbright.info/upload/cover-image/1544265083-nDP3ez.png",
+            "size": "xs",
+            "align": "start"
+          },
+          {
+            "type": "text",
+            "text": "LINE Notify จะแจ้งล่วงหน้า 1 คิว",
+            "gravity": "center",
+            "color": "#ffffff",
+            "wrap": true,
+            "weight": "bold"
+          }
+        ],
+        "margin": "md",
+        "backgroundColor": "#A52A2A55"
+      }
+    ]
+  },
+  "styles": {
+    "body": {
+      "backgroundColor": "#CD5C5C"
+    }
+  }
+}
+}]
+
+  }else {
+      msg = [{
+        type: "text",
+        text: "ขณะนี้หมดเวลาออกบัตรคิว เวลาทำการคือ 08:30 น. - 12:00 น. และ 14:00 น. - 20:30 น."
+      }]
+
+    }
+    }
